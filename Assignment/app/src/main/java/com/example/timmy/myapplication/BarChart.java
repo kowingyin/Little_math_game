@@ -22,8 +22,8 @@ public class BarChart extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
 
-        //db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.OPEN_READONLY);
-        db = SQLiteDatabase.openOrCreateDatabase(getApplicationContext().getFilesDir().getPath(), null);
+        db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.OPEN_READONLY);
+        //db = SQLiteDatabase.openOrCreateDatabase(getApplicationContext().getFilesDir().getPath(), null);
         Cursor cursor = db.rawQuery("SELECT * FROM GamesLog;", null);
         String[] gameDatetime = new String[cursor.getCount()];
         int[] correctCount = new int[cursor.getCount()];
