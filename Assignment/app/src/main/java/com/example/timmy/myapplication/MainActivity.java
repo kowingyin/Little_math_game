@@ -49,6 +49,10 @@ public class MainActivity extends Activity {
         Intent i = new Intent(this, BarChart.class);
         startActivityForResult(i, REQUEST_CODE);
     }
+    public void onClickBtnStartGame(View v){
+        Intent i = new Intent(this, BrainyGameActivity.class);
+        startActivityForResult(i, REQUEST_CODE);
+    }
 
     public void initialDB() {
         File dir=new File(DB_PATH);

@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".NumberGameActivity"
-            android:label="@string/title_activity_number_game"
+            android:name=".SpellingGame"
+            android:label="@string/title_activity_spelling_game"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".BrainyGameActivity"
+            android:label="@string/title_activity_number_game"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
