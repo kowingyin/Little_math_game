@@ -6,7 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
-//import android.content.Intent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.os.AsyncTask;
@@ -14,11 +14,16 @@ import android.os.Handler;
 import android.os.Message;
 
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+//import android.widget.ImageView;
+import android.widget.ImageButton;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -32,8 +37,11 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+//import java.lang.Object.*;
+import java.util.*;
 
 
 public class MathematicGame extends Activity {
@@ -123,6 +131,8 @@ public class MathematicGame extends Activity {
         m = MediaPlayer.create(this, R.raw.music);
         m.start();
         m.setLooping(true);
+
+        //init arrays
         ques = new String[10];
         ans = new String[10];
         fakeAnsArray = new String[10][3];
@@ -209,7 +219,7 @@ public class MathematicGame extends Activity {
 
             //Game Over
             if ((quesNum <= 9) && (quesNum >= 0)) {
-                tvQuestionNum.setText("Question: " + (quesNum + 1));
+                tvQuestionNum.setText("Question No. " + (quesNum + 1));
                 tvQuestion.setText(ques[quesNum]);
             }else{
                 downloading = true;
@@ -282,5 +292,42 @@ public class MathematicGame extends Activity {
         };;
         MyAlertDialog.setNeutralButton("Back to Menu",OkClick );
         MyAlertDialog.show();
+    }
+
+    public void didTapButton(View view) {
+        ImageButton button = (ImageButton)findViewById(R.id.button);
+        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        MyBounceInterpolator interpolator = new MyBounceInterpolator(0.2, 30);
+        myAnim.setInterpolator(interpolator);
+
+        button.startAnimation(myAnim);
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+        if(intent.resolveActivity(getPackageManager())!=null){
+            startActivityForResult(intent, 10);
+        }else{
+            Toast.makeText(this, "Your Device Don't Support Speech Input!",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        switch (requestCode){
+            case 10:
+                if(resultCode == RESULT_OK && data != null){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    editText.setText(result.get(0));
+                    m.reset();
+                }
+                break;
+        }
     }
 }
