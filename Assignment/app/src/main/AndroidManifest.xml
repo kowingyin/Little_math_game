@@ -13,9 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ColorsGame"
+            android:label="@string/title_activity_colors_game"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ReactionGame"
+            android:label="@string/title_activity_reaction_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShapesGame"
+            android:label="@string/title_activity_shapes_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FlashGame"
+            android:label="@string/title_activity_flash_game"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SpellingGame"
             android:label="@string/title_activity_spelling_game"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BrainyGameActivity"
             android:label="@string/title_activity_number_game"

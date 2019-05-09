@@ -2,4 +2,8 @@
     <string name="app_name">Little Math Game</string>
     <string name="title_activity_number_game">NumberGameActivity</string>
     <string name="title_activity_spelling_game">SpellingGame</string>
+    <string name="title_activity_flash_game">FlashGame</string>
+    <string name="title_activity_shapes_game">ShapesGame</string>
+    <string name="title_activity_reaction_game">ReactionGame</string>
+    <string name="title_activity_colors_game">ColorsGame</string>
 </resources>
