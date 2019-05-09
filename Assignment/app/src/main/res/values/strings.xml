@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Little Math Game</string>
+    <string name="title_activity_number_game">NumberGameActivity</string>
 </resources>

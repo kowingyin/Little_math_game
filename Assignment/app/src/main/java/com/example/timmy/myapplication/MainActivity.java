@@ -2,12 +2,14 @@ package com.example.timmy.myapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import java.io.*;
 
 public class MainActivity extends Activity {
     private static final int REQUEST_CODE = 3434;
@@ -17,12 +19,17 @@ public class MainActivity extends Activity {
     private String sql;
     private Cursor cursor = null;
 
-
+    private String DB_PATH;
+    private String DB_NAME = "MathGame_DB.db";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        final Context context = this;
+        DB_PATH = context.getFilesDir().getAbsolutePath() +"/db/";
+        System.out.println(DB_PATH);
         initialDB();
     }
 
@@ -44,9 +51,15 @@ public class MainActivity extends Activity {
     }
 
     public void initialDB() {
+        File dir=new File(DB_PATH);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
         try {
+            System.out.println(DB_PATH+DB_NAME);
+
             //create or open database
-            db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+            db = SQLiteDatabase.openOrCreateDatabase(DB_PATH+DB_NAME, null);
 
             sql = "CREATE TABLE IF NOT EXISTS QuestionsLog (questionNo INT PRIMARY KEY , question TEXT , answer TEXT , yourAnswer TEXT );";
             db.execSQL(sql);

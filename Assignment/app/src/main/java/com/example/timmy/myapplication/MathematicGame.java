@@ -3,6 +3,7 @@ package com.example.timmy.myapplication;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
 //import android.content.Intent;
@@ -40,8 +41,9 @@ public class MathematicGame extends Activity {
     private EditText editText;
     private MediaPlayer m;
 
-    private static String[] ques;
-    private static int[] ans;
+    private String[] ques;
+    private String[] ans;
+    private String[][] fakeAnsArray;
     private int rec = 0, quesNum = 0;
     private SQLiteDatabase db;
     private String sql;
@@ -52,6 +54,8 @@ public class MathematicGame extends Activity {
 
     private DownloadTask task = null;
 
+    private String DB_PATH;
+    private String DB_NAME = "MathGame_DB.db";
 
     private class DownloadTask extends AsyncTask<String, Void, String> {
         private String url;
@@ -60,7 +64,7 @@ public class MathematicGame extends Activity {
             String reply = "";
             try {
                 // prepare URL and execute http request
-                url = "http://itdmoodle.hung0530.com/ptms/questions_ws.php";
+                url = "https://opentdb.com/api.php?amount=10&category=19&difficulty=medium&type=multiple";
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet(url);
                 HttpResponse response = client.execute(request);
@@ -78,6 +82,7 @@ public class MathematicGame extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            System.out.println(reply);
             return reply;
         }
 
@@ -86,15 +91,25 @@ public class MathematicGame extends Activity {
         protected void onPostExecute(String result) {
             try {
                 JSONObject obj = new JSONObject(result);
-                JSONArray arr = obj.getJSONArray("Questions");
+                JSONArray arr = obj.getJSONArray("results");
+                JSONArray fakeans = null;
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject o = arr.getJSONObject(i);
                     ques[i] = o.getString("question");
-                    ans[i] = o.getInt("answer");
+                    ans[i] = o.getString("correct_answer");
+                    System.out.println(ques[i]);
+                    System.out.println(ans[i]);
+                    fakeans = o.getJSONArray("incorrect_answers");
+                    System.out.println(fakeans.getString(0)+" "+fakeans.getString(1)+" "+fakeans.getString(2));
+                    for(int j=0;j<fakeans.length();j++){
+                        System.out.println("here "+j+" "+ fakeans.getString(j));
+                        fakeAnsArray[i][j]= fakeans.getString(j);
+                    }
                 }
                 downloading = false;
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -103,12 +118,14 @@ public class MathematicGame extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mathematic_game);
-
+        final Context context = this;
+        DB_PATH = context.getFilesDir().getPath() +"/db/";
         m = MediaPlayer.create(this, R.raw.music);
         m.start();
         m.setLooping(true);
         ques = new String[10];
-        ans = new int[10];
+        ans = new String[10];
+        fakeAnsArray = new String[10][3];
 
         tvQuestion = (TextView) findViewById(R.id.tvQuestion);
         tvTimer = (TextView) findViewById(R.id.tvTimer);
@@ -154,8 +171,8 @@ public class MathematicGame extends Activity {
                         ((Button) findViewById(R.id.btnAnswer)).setEnabled(true);
                         tvQuestion.setText(ques[quesNum]);
                         ++rec;
-                        tvTimer.setText("Time Spent: " + rec);
-                        tvQuestionNum.setText("Question: " + (quesNum + 1));
+                        tvTimer.setText("Time Spent: " + rec + " seconds");
+                        tvQuestionNum.setText("Question No. " + (quesNum + 1));
                     }
                     break;
                 default:
@@ -176,9 +193,9 @@ public class MathematicGame extends Activity {
         if(editText.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(), "Please enter the answer", Toast.LENGTH_LONG).show();
         }else {
-            int yourAns = Integer.parseInt(editText.getText().toString());
+            String yourAns = editText.getText().toString();
 
-            if (yourAns == ans[quesNum]) {
+            if (yourAns.equals(ans[quesNum])) {
                 Toast.makeText(getApplicationContext(), "Correct, the answer is " + ans[quesNum], Toast.LENGTH_SHORT).show();
                 correctCount++;
             } else {
@@ -209,7 +226,7 @@ public class MathematicGame extends Activity {
         //Insert New QuestionsLog into Database
         try{
             int questionNo = 0;
-            db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.OPEN_READWRITE);
+            db = SQLiteDatabase.openDatabase(DB_PATH+DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
             cursor = db.rawQuery("SELECT questionNo FROM QuestionsLog ORDER BY questionNo DESC LIMIT 1", null);
 
@@ -233,7 +250,7 @@ public class MathematicGame extends Activity {
         //Insert New GamesLog into Database
         try{
             int gameNo = 0;
-            db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.OPEN_READWRITE);
+            db = SQLiteDatabase.openDatabase(DB_PATH+DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
 
             cursor = db.rawQuery("SELECT gameNo FROM GamesLog ORDER BY gameNo DESC LIMIT 1", null);
 

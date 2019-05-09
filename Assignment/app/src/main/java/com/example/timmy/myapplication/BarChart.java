@@ -17,12 +17,17 @@ import android.widget.Toast;
 public class BarChart extends Activity {
     SQLiteDatabase db;
 
+    private String DB_PATH;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
-
-        db = SQLiteDatabase.openDatabase("/data/data/com.example.timmy.myapplication/MG_DB", null, SQLiteDatabase.OPEN_READONLY);
+        final Context context = this;
+        DB_PATH = context.getFilesDir().getPath() +"/db/";
+        String DB_NAME = "MathGame_DB.db";
+        db = SQLiteDatabase.openDatabase(DB_PATH+ DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
         //db = SQLiteDatabase.openOrCreateDatabase(getApplicationContext().getFilesDir().getPath(), null);
         Cursor cursor = db.rawQuery("SELECT * FROM GamesLog;", null);
         String[] gameDatetime = new String[cursor.getCount()];
