@@ -59,6 +59,7 @@ public class MathematicGame extends Activity {
     private boolean downloading = true;
     private String playDate, playTime;
     private int correctCount = 0;
+    private String difficulty = "";
 
     private DownloadTask task = null;
 
@@ -72,7 +73,7 @@ public class MathematicGame extends Activity {
             String reply = "";
             try {
                 // prepare URL and execute http request
-                url = "https://opentdb.com/api.php?amount=10&category=19&difficulty=medium&type=multiple";
+                url = "https://opentdb.com/api.php?amount=10&category=19&difficulty="+difficulty+"&type=multiple";
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet(url);
                 HttpResponse response = client.execute(request);
@@ -107,10 +108,11 @@ public class MathematicGame extends Activity {
                     ans[i] = o.getString("correct_answer");
                     System.out.println(ques[i]);
                     System.out.println(ans[i]);
+                    System.out.println(o.getString("difficulty"));
                     fakeans = o.getJSONArray("incorrect_answers");
                     System.out.println(fakeans.getString(0)+" "+fakeans.getString(1)+" "+fakeans.getString(2));
                     for(int j=0;j<fakeans.length();j++){
-                        System.out.println("here "+j+" "+ fakeans.getString(j));
+                        //System.out.println("here "+j+" "+ fakeans.getString(j));
                         fakeAnsArray[i][j]= fakeans.getString(j);
                     }
                 }
@@ -327,6 +329,18 @@ public class MathematicGame extends Activity {
                     editText.setText(result.get(0));
                     m.reset();
                 }
+                break;
+            case 1111:
+                difficulty = "easy";
+                break;
+            case 2222:
+                difficulty = "medium";
+                break;
+            case 3333:
+                difficulty = "hard";
+                break;
+            case 4444:
+                difficulty = "";
                 break;
         }
     }

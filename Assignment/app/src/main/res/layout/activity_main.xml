@@ -22,7 +22,7 @@ tools:context="com.example.timmy.myapplication.MainActivity">
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnQL"
         android:onClick="onClickBtnStart"
-        android:text="Math knowledge challenge" />
+        android:text="knowledge challenge" />
 
 <Button
     android:layout_width="match_parent"

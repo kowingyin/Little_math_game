@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".DifficultyMenu"
+            android:label="DifficultyMenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ColorsGame"
             android:label="@string/title_activity_colors_game"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReactionGame"
             android:label="@string/title_activity_reaction_game"

@@ -3,21 +3,21 @@ package com.example.timmy.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.Context;
-import android.database.Cursor;
+//import android.database.Cursor;
 import android.database.sqlite.*;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+//import android.widget.Button;
 import android.widget.Toast;
 import java.io.*;
 
 public class MainActivity extends Activity {
     private static final int REQUEST_CODE = 3434;
-    private Button btnStart;
+    //private Button btnStart;
 
     private SQLiteDatabase db;
     private String sql;
-    private Cursor cursor = null;
+    //private Cursor cursor = null;
 
     private String DB_PATH;
     private String DB_NAME = "MathGame_DB.db";
@@ -25,8 +25,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
         final Context context = this;
         DB_PATH = context.getFilesDir().getAbsolutePath() +"/db/";
         System.out.println(DB_PATH);
@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     }
 
     public void onClickBtnStart(View v){
-        Intent i = new Intent(this, MathematicGame.class);
+        Intent i = new Intent(this, DifficultyMenu.class);
         startActivityForResult(i, REQUEST_CODE);
     }
     public void onClickBtnQL(View v){

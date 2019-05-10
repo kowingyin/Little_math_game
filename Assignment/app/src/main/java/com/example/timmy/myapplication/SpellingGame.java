@@ -25,8 +25,8 @@ import java.lang.*;
 public class SpellingGame extends AppCompatActivity {
     private TextView tvIns, tvTimer, tvScore;
     private Button Button2,Button3,Button4,Button5;
-    public int timeleft = 30000, score = 0, combo = 0;
-    public int timelimit = 30000;
+    public int timeleft = 60000, score = 0, combo = 0;
+    public int timelimit = 60000;
     int correct, place, count = 0, wrong, ansCount = 0;
     int pressed1 = 0, pressed2 = 0, pressed3 = 0, pressed4 = 0;
     int corrCount, wrongCount;
@@ -57,28 +57,28 @@ public class SpellingGame extends AppCompatActivity {
         gyroscopeEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                if(event.values[0]>1.3f && event.values[1]>1.3f){
+                if(event.values[0]>1.0f && event.values[1]>1.0f){
                     Button5.performClick();
                     Button5.setPressed(true);
                     Button5.invalidate();
                     Button5.setPressed(false);
                     Button5.invalidate();
                 }
-                if(event.values[0]<-1.3f && event.values[1]>1.3f){
+                if(event.values[0]<-1.0f && event.values[1]>1.0f){
                     Button3.performClick();
                     Button3.setPressed(true);
                     Button3.invalidate();
                     Button3.setPressed(false);
                     Button3.invalidate();
                 }
-                if(event.values[0]>1.3f && event.values[1]<-1.3f){
+                if(event.values[0]>1.0f && event.values[1]<-1.0f){
                     Button4.performClick();
                     Button4.setPressed(true);
                     Button4.invalidate();
                     Button4.setPressed(false);
                     Button4.invalidate();
                 }
-                if(event.values[0]<-1.3f && event.values[1]<-1.3f){
+                if(event.values[0]<-1.0f && event.values[1]<-1.0f){
                     Button2.performClick();
                     Button2.setPressed(true);
                     Button2.invalidate();
@@ -106,7 +106,7 @@ public class SpellingGame extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeleft-=1000;
                 //millisUntilFinished = timeleft;
-                tvTimer.setText("Time remaining (s): "+ millisUntilFinished/1000+" seconds.");
+                tvTimer.setText("Time remaining (s) : "+ millisUntilFinished/1000+" seconds.");
 
             }
 
