@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,15 +16,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.util.*;
 import java.io.*;
-
-import java.util.Timer;
+import java.lang.*;
+//import java.util.Timer;
 
 public class SpellingGame extends AppCompatActivity {
     private TextView tvIns, tvTimer, tvScore;
     private Button Button2,Button3,Button4,Button5;
-    int time = 0, score = 0, combo = 0, timelimit = 10;
+    public int timeleft = 30000, score = 0, combo = 0;
+    public int timelimit = 30000;
     int correct, place, count = 0, wrong, ansCount = 0;
     int pressed1 = 0, pressed2 = 0, pressed3 = 0, pressed4 = 0;
     int corrCount, wrongCount;
@@ -33,12 +36,13 @@ public class SpellingGame extends AppCompatActivity {
     String[] wrongAns = {"dicttionary", "explanasion", "requirment", "tatoo", "convienient" , "achievemet" , "distint" , "brige" , "contant" , "ebout" , "suden", "eferyday" , "questsion" , "meen" , "fathar" , "earthquick" , "forgut" , "asume" , "eyasr" , "srand" ,
             "saterday", "faburary" , "decryse" , "incryse", "supplai", "photosinthsis", "elephent", "astroaunt", "recieve", "preposision"};
     int timeRec = 0;
-    Timer tm;
+    //Timer tm;
 
     //gyroscope
     private SensorManager sensorManager;
     private Sensor gyroscopeSensor;
     private SensorEventListener gyroscopeEventListener;
+    private CountDownTimer cdt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,28 +57,28 @@ public class SpellingGame extends AppCompatActivity {
         gyroscopeEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                if(event.values[0]>1.0f && event.values[1]>1.0f){
+                if(event.values[0]>1.3f && event.values[1]>1.3f){
                     Button5.performClick();
                     Button5.setPressed(true);
                     Button5.invalidate();
                     Button5.setPressed(false);
                     Button5.invalidate();
                 }
-                if(event.values[0]<-1.0f && event.values[1]>1.0f){
+                if(event.values[0]<-1.3f && event.values[1]>1.3f){
                     Button3.performClick();
                     Button3.setPressed(true);
                     Button3.invalidate();
                     Button3.setPressed(false);
                     Button3.invalidate();
                 }
-                if(event.values[0]>1.0f && event.values[1]<-1.0f){
+                if(event.values[0]>1.3f && event.values[1]<-1.3f){
                     Button4.performClick();
                     Button4.setPressed(true);
                     Button4.invalidate();
                     Button4.setPressed(false);
                     Button4.invalidate();
                 }
-                if(event.values[0]<-1.0f && event.values[1]<-1.0f){
+                if(event.values[0]<-1.3f && event.values[1]<-1.3f){
                     Button2.performClick();
                     Button2.setPressed(true);
                     Button2.invalidate();
@@ -95,10 +99,27 @@ public class SpellingGame extends AppCompatActivity {
         Button5 = (Button) findViewById(R.id.button5);
         tvTimer = (TextView) findViewById(R.id.tvTimer);
         tvScore = (TextView) findViewById(R.id.tvScore);
-        tm = new Timer();
+        tvScore.setText("Score: 0");
+
+        cdt = new CountDownTimer(timelimit,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeleft-=1000;
+                //millisUntilFinished = timeleft;
+                tvTimer.setText("Time remaining (s): "+ millisUntilFinished/1000+" seconds.");
+
+            }
+
+            @Override
+            public void onFinish() {
+                tvTimer.setText("Time over!");
+                finish();
+            }
+        }.start();
         init();
 
     }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -109,8 +130,12 @@ public class SpellingGame extends AppCompatActivity {
         super.onPause();
         sensorManager.unregisterListener(gyroscopeEventListener);
     }
+    @Override
+    public void finish(){
+        super.finish();
+        Toast.makeText(this,"Game over! you scored : "+ score, Toast.LENGTH_LONG).show();
+    }
     public void init(){
-
         if (count == 10)
             count = 0;
         pressed1 = 0;
@@ -178,24 +203,28 @@ public class SpellingGame extends AppCompatActivity {
         count++;
     }
     public void onClickBtn2(View v){
-        if (place != 0)
-        {
-            if (pressed1 == 0)
-            {
+        if (place != 0) {
+            if (pressed1 == 0) {
                 pressed1 = 1;
                 ansCount++;
             }
-            if (ansCount == 3)
-            {
+            if (ansCount == 3) {
                 combo++;
                 score++;
                 tvScore.setText("Score: " + score);
                 init();
+            } else {
+                combo = 0;
             }
-            else combo = 0;
-            if (combo == 3)
-                timelimit += 2;
-        }else init();
+            if (combo == 3) {
+                timeleft += 5000;
+                cdt.cancel();
+                cdt.onTick(timeleft);
+                cdt.start();
+            }
+        }else {
+            init();
+        }
     }
     public void onClickBtn3(View v){
         if (place != 1)
@@ -213,8 +242,12 @@ public class SpellingGame extends AppCompatActivity {
                 init();
             }
             else combo = 0;
-            if (combo == 3)
-                timelimit += 2;
+            if (combo == 3){
+                timeleft += 5000;
+                cdt.cancel();
+                cdt.onTick(timeleft);
+                cdt.start();
+            }
         }
         else init();
     }
@@ -234,8 +267,12 @@ public class SpellingGame extends AppCompatActivity {
                 init();
             }
             else combo = 0;
-            if (combo == 3)
-                timelimit += 2;
+            if (combo == 3){
+                timeleft += 5000;
+                cdt.cancel();
+                cdt.onTick(timeleft);
+                cdt.start();
+            }
         }
         else init();
     }
@@ -255,8 +292,12 @@ public class SpellingGame extends AppCompatActivity {
                 init();
             }
             else combo = 0;
-            if (combo == 3)
-                timelimit += 2;
+            if (combo == 3){
+                timeleft += 5000;
+                cdt.cancel();
+                cdt.onTick(timeleft);
+                cdt.start();
+            }
         }
         else init();
     }
