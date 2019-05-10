@@ -1,6 +1,10 @@
 package com.example.timmy.myapplication;
 
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +13,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.*;
 import java.io.*;
 
@@ -29,10 +35,60 @@ public class SpellingGame extends AppCompatActivity {
     int timeRec = 0;
     Timer tm;
 
+    //gyroscope
+    private SensorManager sensorManager;
+    private Sensor gyroscopeSensor;
+    private SensorEventListener gyroscopeEventListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spelling_game);
+
+        sensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        gyroscopeSensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if(gyroscopeSensor == null){
+            Toast.makeText(this,"The device has no gyroscope!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        gyroscopeEventListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if(event.values[0]>1.0f && event.values[1]>1.0f){
+                    Button5.performClick();
+                    Button5.setPressed(true);
+                    Button5.invalidate();
+                    Button5.setPressed(false);
+                    Button5.invalidate();
+                }
+                if(event.values[0]<-1.0f && event.values[1]>1.0f){
+                    Button3.performClick();
+                    Button3.setPressed(true);
+                    Button3.invalidate();
+                    Button3.setPressed(false);
+                    Button3.invalidate();
+                }
+                if(event.values[0]>1.0f && event.values[1]<-1.0f){
+                    Button4.performClick();
+                    Button4.setPressed(true);
+                    Button4.invalidate();
+                    Button4.setPressed(false);
+                    Button4.invalidate();
+                }
+                if(event.values[0]<-1.0f && event.values[1]<-1.0f){
+                    Button2.performClick();
+                    Button2.setPressed(true);
+                    Button2.invalidate();
+                    Button2.setPressed(false);
+                    Button2.invalidate();
+                }
+
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
         Button2 = (Button) findViewById(R.id.button2);
         Button3 = (Button) findViewById(R.id.button3);
         Button4 = (Button) findViewById(R.id.button4);
@@ -42,6 +98,16 @@ public class SpellingGame extends AppCompatActivity {
         tm = new Timer();
         init();
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        sensorManager.registerListener(gyroscopeEventListener,gyroscopeSensor,SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        sensorManager.unregisterListener(gyroscopeEventListener);
     }
     public void init(){
 
