@@ -183,8 +183,8 @@ public class MathematicGame extends Activity {
                         ((Button) findViewById(R.id.btnAnswer)).setEnabled(true);
                         tvQuestion.setText(ques[quesNum]);
                         ++rec;
-                        tvTimer.setText("Time Spent: " + rec + " seconds");
-                        tvQuestionNum.setText("Question No. " + (quesNum + 1));
+                        tvTimer.setText(getResources().getString(R.string.time_spent) + rec + getResources().getString(R.string.seconds));
+                        tvQuestionNum.setText(getResources().getString(R.string.question)+" No. " + (quesNum + 1));
                     }
                     break;
                 default:
@@ -221,7 +221,7 @@ public class MathematicGame extends Activity {
 
             //Game Over
             if ((quesNum <= 9) && (quesNum >= 0)) {
-                tvQuestionNum.setText("Question No. " + (quesNum + 1));
+                tvQuestionNum.setText(getResources().getString(R.string.question)+" No. " + (quesNum + 1));
                 tvQuestion.setText(ques[quesNum]);
             }else{
                 downloading = true;
@@ -280,7 +280,7 @@ public class MathematicGame extends Activity {
     }
 
     private void ShowMsgDialog() {
-        String msg = "Time Spent: " + rec + " second\nCorrect: " + correctCount;
+        String msg = getResources().getString(R.string.time_spent) + rec + getResources().getString(R.string.seconds)+"\nCorrect: " + correctCount;
 
         AlertDialog.Builder MyAlertDialog = new AlertDialog.Builder(this);
         MyAlertDialog.setTitle("Game Over");

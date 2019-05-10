@@ -17,12 +17,12 @@
         android:layout_marginTop="27dp"
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="27dp"
-        android:text="ready..."
         android:onClick="onClickBtn2"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/ready"
         app:layout_constraintBottom_toTopOf="@id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/tvIns"
-        app:layout_constraintEnd_toStartOf="@id/button3"/>
+        app:layout_constraintEnd_toStartOf="@id/button3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvIns" />
 
     <Button
         android:id="@+id/button3"
@@ -32,8 +32,8 @@
         android:layout_marginTop="27dp"
         android:layout_marginEnd="27dp"
         android:layout_marginBottom="27dp"
-        android:text="ready..."
         android:onClick="onClickBtn3"
+        android:text="@string/ready"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2"
@@ -46,9 +46,8 @@
         android:layout_marginStart="27dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="13dp"
-        android:layout_marginBottom="27dp"
-        android:text="ready..."
         android:onClick="onClickBtn4"
+        android:text="@string/ready"
         app:layout_constraintEnd_toStartOf="@+id/button5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
@@ -60,9 +59,8 @@
         android:layout_marginStart="13dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="27dp"
-        android:layout_marginBottom="27dp"
-        android:text="ready..."
         android:onClick="onClickBtn5"
+        android:text="@string/ready"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintTop_toBottomOf="@+id/button3" />
@@ -72,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Time remaining (s) : "
+        android:text="@string/time_remaining"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvScore"
@@ -83,8 +81,7 @@
         android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="95dp"
-        android:text="Score: "
+        android:text="@string/score"
         android:textSize="18sp"
         android:textStyle="bold"
 

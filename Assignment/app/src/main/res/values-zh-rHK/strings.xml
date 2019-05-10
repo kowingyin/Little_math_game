@@ -22,4 +22,10 @@
     <string name="any_diff">任何難度</string>
     <string name="select_a_game">選擇遊戲：</string>
     <string name="title_in_spelling_game">一分鐘內轉動手機\n按下所有錯字!</string>
+    <string name="score">得分：</string>
+    <string name="time_remaining">剩餘時間：</string>
+    <string name="seconds">秒</string>
+    <string name="question">問題：</string>
+    <string name="time_spent">所花費的時間：</string>
+    <string name="ready">準備...</string>
 </resources>

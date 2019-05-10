@@ -99,14 +99,14 @@ public class SpellingGame extends AppCompatActivity {
         Button5 = (Button) findViewById(R.id.button5);
         tvTimer = (TextView) findViewById(R.id.tvTimer);
         tvScore = (TextView) findViewById(R.id.tvScore);
-        tvScore.setText("Score: 0");
+        tvScore.setText(getResources().getString(R.string.score)+"0");
 
         cdt = new CountDownTimer(timelimit,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeleft-=1000;
                 //millisUntilFinished = timeleft;
-                tvTimer.setText("Time remaining (s) : "+ millisUntilFinished/1000+" seconds.");
+                tvTimer.setText(getResources().getString(R.string.time_remaining)+ millisUntilFinished/1000+getResources().getString(R.string.seconds));
 
             }
 
@@ -211,7 +211,7 @@ public class SpellingGame extends AppCompatActivity {
             if (ansCount == 3) {
                 combo++;
                 score++;
-                tvScore.setText("Score: " + score);
+                tvScore.setText(getResources().getString(R.string.score) + score);
                 init();
             } else {
                 combo = 0;
@@ -238,7 +238,7 @@ public class SpellingGame extends AppCompatActivity {
             {
                 combo++;
                 score++;
-                tvScore.setText("Score: " + score);
+                tvScore.setText(getResources().getString(R.string.score) + score);
                 init();
             }
             else combo = 0;
@@ -263,7 +263,7 @@ public class SpellingGame extends AppCompatActivity {
             {
                 combo++;
                 score++;
-                tvScore.setText("Score: " + score);
+                tvScore.setText(getResources().getString(R.string.score) + score);
                 init();
             }
             else combo = 0;
@@ -288,7 +288,7 @@ public class SpellingGame extends AppCompatActivity {
             {
                 combo++;
                 score++;
-                tvScore.setText("Score: " + score);
+                tvScore.setText(getResources().getString(R.string.score) + score);
                 init();
             }
             else combo = 0;
