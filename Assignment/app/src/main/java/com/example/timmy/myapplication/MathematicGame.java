@@ -73,7 +73,7 @@ public class MathematicGame extends Activity {
             String reply = "";
             try {
                 // prepare URL and execute http request
-                url = "https://opentdb.com/api.php?amount=10&category=19&difficulty="+difficulty+"&type=multiple";
+                url = "https://opentdb.com/api.php?amount=10&category=9&difficulty="+difficulty+"&type=multiple";
                 HttpClient client = new DefaultHttpClient();
                 HttpGet request = new HttpGet(url);
                 HttpResponse response = client.execute(request);

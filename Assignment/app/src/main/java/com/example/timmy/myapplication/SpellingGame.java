@@ -25,8 +25,8 @@ import java.lang.*;
 public class SpellingGame extends AppCompatActivity {
     private TextView tvIns, tvTimer, tvScore;
     private Button Button2,Button3,Button4,Button5;
-    public int timeleft = 60000, score = 0, combo = 0;
-    public int timelimit = 60000;
+    public int timeleft = 10000, score = 0, combo = 0;
+    public int timelimit = 10000;
     int correct, place, count = 0, wrong, ansCount = 0;
     int pressed1 = 0, pressed2 = 0, pressed3 = 0, pressed4 = 0;
     int corrCount, wrongCount;

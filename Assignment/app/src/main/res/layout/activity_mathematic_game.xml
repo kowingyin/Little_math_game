@@ -20,16 +20,18 @@
         android:layout_alignParentStart="true">
 
         <TextView
+            android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time Spent:"
-            android:id="@+id/tvTimer" />
+            android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/tvQuestionNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Question: "
-            android:id="@+id/tvQuestionNum" />
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,10 +40,11 @@
             android:id="@+id/tvQuestion" />
 
         <TextView
+            android:id="@+id/tvAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer:"
-            android:id="@+id/tvAnswer" />
+            android:text="@string/answer"
+            android:textSize="24sp" />
 
         <EditText
             android:layout_width="match_parent"
@@ -50,11 +53,11 @@
             android:id="@+id/editText" />
 
         <Button
+            android:id="@+id/btnAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
             android:onClick="onClickbtnAnswer"
-            android:id="@+id/btnAnswer" />
+            android:text="@string/confirm" />
 
         <ImageButton
             android:id="@+id/button"

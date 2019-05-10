@@ -1,9 +1,24 @@
 <resources>
-    <string name="app_name">Little Math Game</string>
+    <string name="app_name">Little Quiz Game</string>
     <string name="title_activity_number_game">NumberGameActivity</string>
-    <string name="title_activity_spelling_game">SpellingGame</string>
-    <string name="title_activity_flash_game">FlashGame</string>
-    <string name="title_activity_shapes_game">ShapesGame</string>
-    <string name="title_activity_reaction_game">ReactionGame</string>
-    <string name="title_activity_colors_game">ColorsGame</string>
+    <string name="title_activity_spelling_game">Spelling</string>
+    <string name="title_activity_flash_game">Flash</string>
+    <string name="title_activity_shapes_game">Shapes</string>
+    <string name="title_activity_reaction_game">Reaction</string>
+    <string name="title_activity_colors_game">Colors</string>
+    <string name="title_activity_main">Brainy Master</string>
+    <string name="main_menu_fun_game">Brainy Fun Games</string>
+    <string name="main_menu_knowledge_challenge">Knowledge Challenge</string>
+    <string name="main_menu_show_qlog">show questions log</string>
+    <string name="main_menu_show_glog">show games log</string>
+    <string name="main_menu_show_gResult">show games results charts</string>
+    <string name="answer">Answer:</string>
+    <string name="confirm">Confirm</string>
+    <string name="select_diff">Select the difficulty of questions:</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="any_diff">Any Difficulty</string>
+    <string name="select_a_game">Select a Game:</string>
+    <string name="title_in_spelling_game">Flip your phone to press \n all wrong spelling words in 1 minute!</string>
 </resources>

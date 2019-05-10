@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">問答遊戲</string>
+    <string name="title_activity_number_game">益智遊戲</string>
+    <string name="title_activity_spelling_game">串字</string>
+    <string name="title_activity_flash_game">閃光</string>
+    <string name="title_activity_shapes_game">形狀</string>
+    <string name="title_activity_reaction_game">反應</string>
+    <string name="title_activity_colors_game">顏色</string>
+    <string name="title_activity_main">腦力大師</string>
+    <string name="main_menu_fun_game">益智遊戲</string>
+    <string name="main_menu_knowledge_challenge">知識挑戰</string>
+    <string name="main_menu_show_qlog">問題記錄</string>
+    <string name="main_menu_show_glog">遊戲記錄</string>
+    <string name="main_menu_show_gResult">遊戲記錄圖表</string>
+    <string name="answer">答案</string>
+    <string name="confirm">確定</string>
+    <string name="select_diff">選擇問題的難度：</string>
+    <string name="easy">簡單</string>
+    <string name="medium">中等</string>
+    <string name="hard">困難</string>
+    <string name="any_diff">任何難度</string>
+    <string name="select_a_game">選擇遊戲：</string>
+    <string name="title_in_spelling_game">一分鐘內轉動手機\n按下所有錯字!</string>
+</resources>

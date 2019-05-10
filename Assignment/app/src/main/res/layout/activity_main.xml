@@ -9,44 +9,47 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 android:background="@drawable/bg"
 tools:context="com.example.timmy.myapplication.MainActivity">
+
     <Button
         android:id="@+id/btnStartGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnStart"
         android:onClick="onClickBtnStartGame"
-        android:text="Brainy Fun Games" />
+        android:text="@string/main_menu_fun_game" />
+
     <Button
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnQL"
         android:onClick="onClickBtnStart"
-        android:text="knowledge challenge" />
+        android:text="@string/main_menu_knowledge_challenge" />
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Show QuestionsLog"
-    android:onClick="onClickBtnQL"
-    android:id="@+id/btnQL"
-    android:layout_above="@+id/btnGL"/>
+    <Button
+        android:id="@+id/btnQL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnGL"
+        android:onClick="onClickBtnQL"
+        android:text="@string/main_menu_show_qlog" />
 
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Show GamesLog"
-    android:onClick="onClickBtnGL"
-    android:id="@+id/btnGL"
-    android:layout_above="@+id/btnGR"/>
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Show Game Result"
-    android:onClick="onClickBtnGR"
-    android:id="@+id/btnGR"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/btnGL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnGR"
+        android:onClick="onClickBtnGL"
+        android:text="@string/main_menu_show_glog" />
+
+    <Button
+        android:id="@+id/btnGR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="onClickBtnGR"
+        android:text="@string/main_menu_show_gResult" />
 
     <TextView
         android:id="@+id/textView"
@@ -60,7 +63,7 @@ tools:context="com.example.timmy.myapplication.MainActivity">
         android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
         android:clickable="false"
-        android:text="BRAINY MASTER"
+        android:text="@string/title_activity_main"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="36sp"
